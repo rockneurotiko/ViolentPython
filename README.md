@@ -1,7 +1,8 @@
 ViolentPython
 =============
 
-A repo where I will upload the codes since I'm reading the book Violent Python
+A repo where I will upload the codes since I'm reading the book Violent Python.
+
 The codes are not exactly as is writed in the book, I modified the examples, trying to improve it,
 or just writing whatever I want in that moment.
 Cheers and don't be evil ;-)
@@ -12,6 +13,7 @@ Chapter 1
 An introduction to python with some codes.
 
 [X] Reading.
+
 [X] Code writing.
 
 Codes:
@@ -28,6 +30,7 @@ Chapter 2
 Penetration testing with Python.
 
 On the way with the two states (read and write at the same time :-P)
+
 [O] Reading.   
 [O] Code Writing
 
@@ -36,3 +39,7 @@ Codes:
 1)TCPPortScanner.py  --> A simple port scanner using sockets, threads and semaphores (to write in order on screen).
 
 2)nmapPortScanner.py --> A port scanner using nmap library for python.
+
+
+
+[CONTINUE...]
