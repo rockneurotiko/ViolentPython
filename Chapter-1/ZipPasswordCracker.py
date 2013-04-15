@@ -6,12 +6,16 @@ import optparse
 from threading import Thread
 
 def extractFile(zipFile, password):
+    """ function that tries to extract the zip with the password given
+    and if it's possible print the password"""
     try:
         zipFile.extractall(pwd=password)
         print "[+] Password = " + password + "\n"
     except:
         pass
+
 def checkFile(filePath, programName):
+    """ function implemented to check if the file in the path is a file and you have read acces"""
     if not os.path.isfile(filePath):
         print "[-] " + filePath + " passwords file does not exists."
         exit(0)
@@ -19,31 +23,32 @@ def checkFile(filePath, programName):
         print "[-] " + filePath + " passwords file access denied."
         exit(0)
 
-def help(programName):
-    print "[-] Usage: " + programName + " -f <ZipFile> + -d [path to dictionary file]"
-    print "[-] If not path is given for dictionary file, the program will use \"dictionary.txt\" file."
+
 def main():
+
+    #parser is used to parse the options given as argvs
     parser = optparse.OptionParser("[-] Usage: " + sys.argv[0] + "-f <zipfile> -d [dictionary]")
     parser.add_option("-f", dest="zipFilePath", type="string", help="specify zip file")
     parser.add_option("-d", dest="dictFilePath", type="string", help="specify dictionary file (not necesary)")
-    (options, args) = parser.parse_args()
-    if options.zipFilePath == None:
+    (options, args) = parser.parse_args()   #right here get the args defined in the options
+    if options.zipFilePath == None:         #the zip file must be passed
         print parser.usage
         exit(0)
-    if options.dictFilePath == None:
+    if options.dictFilePath == None:        #but if not diccionary is given, will try to use "dictionary.txt"
         options.dictFilePath = "dictionary.txt"
     (zipFilePath, dictFilePath) = options.zipFilePath, options.dictFilePath
 
+
+    #check the files with the function implemented
     checkFile(zipFilePath, sys.argv[0])
     checkFile(dictFilePath, sys.argv[0])
 
-    zipFile = zipfile.ZipFile(zipFilePath)
-    dictFile = open(dictFilePath)
-    for line in dictFile.readlines():
+    zipFile = zipfile.ZipFile(zipFilePath) #read the zip file
+    dictFile = open(dictFilePath)           #read the dictionary
+    for line in dictFile.readlines():       #for every word in the dictionary
         password = line.strip("\n")
-        t = Thread(target=extractFile, args=(zipFile,password))
+        t = Thread(target=extractFile, args=(zipFile,password)) #creates a thread that call the function extractFile
         t.start()
-    #print "[-] Sorry, the password couldn't be founded with that dictionary"
 
 if __name__ == "__main__":
     main()
