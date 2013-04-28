@@ -45,5 +45,6 @@ Codes:
 
 4)SSHTool.py         --> A script tool made by myself to make a SSH connection and then send commands and get the answer... Check it pls ;-)
 
+5)CrackSSHDict.py    --> A script to crack a SSH password with a dictionary, with threads and Semaphore to have a max conncetions.
 
 [[CONTINUE...]]
